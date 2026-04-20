@@ -1,0 +1,27 @@
+# See https://docs.searxng.org/admin/settings/settings.html#use-default-settings
+use_default_settings: true
+
+server:
+  secret_key: "searxng-mcp-secret-key-change-in-production"
+  limiter: false
+  image_proxy: false
+
+search:
+  safe_search: 0
+  autocomplete: ""
+  default_lang: ""
+  formats:
+    - html
+    - json
+
+engines:
+  - name: google
+    disabled: false
+  - name: duckduckgo
+    disabled: false
+  - name: bing
+    disabled: false
+  - name: wikipedia
+    disabled: false
+  - name: startpage
+    disabled: false

@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "investigator": {
+      "command": "python",
+      "args": ["-m", "src.server"]
+    }
+  }
+}

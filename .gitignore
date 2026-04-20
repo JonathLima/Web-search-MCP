@@ -1,0 +1,36 @@
+# IA
+.qwen/
+.planning/
+
+# Byte-compiled / optimized / distributed files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# Virtual environments
+.venv/
+venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environment variables
+.env
+
+# Docker
+searxng/config/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
