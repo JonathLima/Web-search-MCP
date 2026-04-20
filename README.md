@@ -294,7 +294,7 @@ docker compose up -d
 
 ### 3. Configure Your MCP Client
 
-This server supports both **STDIO** (local) and **SSE** (remote) transport.
+This server supports both **STDIO** (local) and **HTTP** (remote) transport.
 
 #### STDIO Mode
 
@@ -313,18 +313,18 @@ python -m src.server
 }
 ```
 
-#### SSE Mode (Remote)
+#### HTTP Mode (Remote)
 
 ```bash
-python -m src.server sse
-# Server runs at http://localhost:8000/sse
+python -m src.server http
+# Server runs at http://localhost:8000/mcp
 ```
 
 ```json
 {
   "mcpServers": {
     "investigator": {
-      "url": "http://localhost:8000/sse"
+      "url": "http://localhost:8000/mcp"
     }
   }
 }
@@ -430,19 +430,19 @@ Settings → MCP → Add new server
 
 ---
 
-### LM Studio (SSE)
+### LM Studio (HTTP)
 
 ```bash
-python -m src.server sse
+python -m src.server http
 ```
 
-**File:** `configs/lm_studio.json`
+**File:** `configs/lm-studio.json`
 
 ```json
 {
   "mcpServers": {
     "investigator": {
-      "url": "http://localhost:8000/sse"
+      "url": "http://localhost:8000/mcp"
     }
   }
 }

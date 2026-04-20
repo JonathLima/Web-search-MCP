@@ -100,7 +100,7 @@ class ServerConfig(BaseSettings):
     )
 
     host: str = Field(default="0.0.0.0", description="Host address to bind")
-    port: int = Field(default=8000, ge=1, le=65535, description="Port for SSE endpoint")
+    port: int = Field(default=8000, ge=1, le=65535, description="Port for MCP endpoint")
     api_key: str = Field(default="", description="Optional API key for MCP server access control")
     default_search_type: str = Field(
         default="auto",

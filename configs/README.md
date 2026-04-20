@@ -12,7 +12,7 @@ This directory contains ready-to-use MCP client configurations for various tools
 | Windsurf | windsurf.json | STDIO | local |
 | VS Code (Cline) | vscode-cline.json | STDIO | local |
 | LM Studio | lm-studio.json | Streamable HTTP | http://localhost:8000/mcp |
-| Remote SSE | sse-remote.json | Streamable HTTP | http://localhost:8000/mcp |
+| Remote HTTP | http-remote.json | Streamable HTTP | http://localhost:8000/mcp |
 
 ## Usage
 

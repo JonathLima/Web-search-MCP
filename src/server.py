@@ -1,11 +1,6 @@
 from __future__ import annotations
 
 import logging
-import secrets
-
-from starlette.middleware.base import BaseHTTPMiddleware
-from starlette.requests import Request
-from starlette.responses import Response
 
 from mcp.server.fastmcp import FastMCP
 
@@ -31,18 +26,6 @@ mcp = FastMCP(
     port=server_config.port,
 )
 
-class APIKeyMiddleware(BaseHTTPMiddleware):
-
-    async def dispatch(self, request: Request, call_next):
-        api_key = server_config.api_key
-        if not api_key:
-            return await call_next(request)
-
-        auth = request.headers.get("authorization", "")
-        if not secrets.compare_digest(auth, f"Bearer {api_key}"):
-            return Response(content="Unauthorized", status_code=401)
-
-        return await call_next(request)
 
 @mcp.tool()
 async def web_search(
@@ -160,7 +143,7 @@ if __name__ == "__main__":
     import sys
     mode = sys.argv[1] if len(sys.argv) > 1 else "http"
 
-    if mode == "http":
+    if mode == "http" or mode == "sse":
         run_http()
     elif mode == "stdio":
         run_stdio()
