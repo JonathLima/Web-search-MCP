@@ -1,12 +1,12 @@
 services:
   # -----------------------------------------------------------------------
-  # MCP Tool Server — FastMCP, exposes Streamable HTTP on :8000/mcp
+  # WIE - Web Investigator Engine MCP Server
   # -----------------------------------------------------------------------
   mcp-server:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: investigator-mcp-server
+    container_name: wie-mcp-server
     ports:
       - "8000:8000"
     environment:
@@ -27,7 +27,7 @@ services:
   # -----------------------------------------------------------------------
   searxng:
     image: searxng/searxng:latest
-    container_name: investigator-searxng
+    container_name: wie-searxng
     volumes:
       - ./searxng/settings.yml:/etc/searxng/settings.yml
     environment:

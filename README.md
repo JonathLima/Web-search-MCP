@@ -1,8 +1,8 @@
-# 🔍 The Exa-Like Open-Source Investigator Engine
+# WIE - Web Investigator Engine
 
 > **Privacy-first, unlimited, zero-cost neural search for AI agents**
 
-[![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![AGPLv3 License](https://img.shields.io/badge/License-AGPLv3-blue.svg)](LICENSE)
 [![Python 3.11+](https://img.shields.io/badge/Python-3.11+-green.svg)](https://python.org)
 
 A high-precision Model Context Protocol (MCP) server that provides deep investigation tools for LLMs. Built on the **Investigator Pattern**: rich metadata and deep content extraction enable models (Claude, Gemini, GPT-4) to perform factually perfect research — without complex prompts.
@@ -11,16 +11,16 @@ A high-precision Model Context Protocol (MCP) server that provides deep investig
 
 ---
 
-## ✨ Why Investigator Engine?
+## ✨ Why WIE - Web Investigator Engine?
 
-| Feature | Exa Search | This Project |
-|---------|-----------|--------------|
+| Feature | Exa Search | WIE - Web Investigator Engine |
+|---------|-----------|----------------------|
 | **Cost** | Paid tier | Free & open-source |
 | **Privacy** | Data may be logged | Zero-logging, self-hosted |
 | **Customization** | Limited | Full source access |
 | **Infrastructure** | External API dependency | Run on your own hardware |
-| **透明度** | Proprietary black box | Fully transparent |
-| **速度** | Fast | Tuned for LLM efficiency |
+| **Transparency** | Proprietary black box | Fully transparent |
+| **Speed** | Fast | Tuned for LLM efficiency |
 
 ---
 
@@ -696,8 +696,8 @@ docker compose down
 ```
 
 Services:
-- **investigator**: MCP server on port 8000
-- **searxng**: Meta-search engine on port 8080
+- **wie-mcp-server**: WIE MCP server on port 8000
+- **wie-searxng**: Meta-search engine on port 8080
 
 ---
 
@@ -712,4 +712,57 @@ Services:
 
 ## 📜 License
 
-MIT License — see [LICENSE](LICENSE)
+**GNU Affero General Public License v3 (AGPLv3)** — [LICENSE](LICENSE)
+
+Copyright (C) 2025-2026 Jonathan Lima
+
+---
+
+## 🔧 Troubleshooting
+
+### "Connection refused"
+- Check if container is running: `docker ps`
+- Check logs: `docker logs wie-mcp-server`
+
+### "Timeout"
+- Use the URL `/mcp` (Streamable HTTP), not `/sse`
+
+### "Invalid params"
+- Verify the URL is correct: must end with `/mcp`
+
+### Remote Access
+
+To access from another computer, replace `localhost` with the host IP:
+
+```json
+{
+  "mcpServers": {
+    "investigator": {
+      "url": "http://192.168.1.100:8000/mcp"
+    }
+  }
+}
+```
+
+### Environment Variables
+
+In `docker-compose.yml`, add:
+
+```yaml
+environment:
+  - SEARXNG_HOST=http://searxng:8080
+  - API_KEY=your-key-here
+```
+
+### Custom Port
+
+To change the port (e.g., 8090):
+
+```yaml
+# docker-compose.yml
+ports:
+  - "8090:8000"
+
+# Client configuration
+"url": "http://localhost:8090/mcp"
+```
