@@ -1,8 +1,8 @@
-# 🔍 O Investigator Engine de Código Aberto Estilo Exa
+# WIE - Web Investigator Engine
 
 > **Privacidade primeiro, ilimitado, busca neural sem custos para agentes AI**
 
-[![Licença MIT](https://img.shields.io/badge/Licen%C3%A7a-MIT-blue.svg)](LICENSE)
+[![Licença AGPLv3](https://img.shields.io/badge/Licen%C3%A7a-AGPLv3-blue.svg)](LICENSE)
 [![Python 3.11+](https://img.shields.io/badge/Python-3.11+-green.svg)](https://python.org)
 
 Um servidor MCP (Model Context Protocol) de alta precisão que fornece ferramentas de investigação profunda para LLMs. Construído sobre o **Investigator Pattern**: metadados ricos e extração profunda de conteúdo permitem que modelos (Claude, Gemini, GPT-4) realizem pesquisas factualmente perfeitas — sem prompts complexos.
@@ -11,10 +11,10 @@ Um servidor MCP (Model Context Protocol) de alta precisão que fornece ferrament
 
 ---
 
-## ✨ Por Que Investigator Engine?
+## ✨ Por Que WIE - Web Investigator Engine?
 
-| Recurso | Exa Search | Este Projeto |
-|---------|-----------|--------------|
+| Recurso | Exa Search | WIE - Web Investigator Engine |
+|---------|-----------|-------------------------------|
 | **Custo** | Plano pago | Gratuito e open-source |
 | **Privacidade** | Dados podem ser logados | Zero-logging, self-hosted |
 | **Customização** | Limitada | Acesso total ao código |
@@ -46,7 +46,7 @@ Um servidor MCP (Model Context Protocol) de alta precisão que fornece ferrament
 │   └───────────────────────┘                                                 │
 └─────────────────────────────────────────────────────────────────────────────┘
                                  │
-                                 ���
+                                 ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                         CAMADA BACKEND                                      │
 │                                                                             │
@@ -696,8 +696,8 @@ docker compose down
 ```
 
 Serviços:
-- **investigator**: Servidor MCP na porta 8000
-- **searxng**: Meta-motor de busca na porta 8080
+- **wie-mcp-server**: Servidor MCP WIE na porta 8000
+- **wie-searxng**: Meta-motor de busca na porta 8080
 
 ---
 
@@ -712,4 +712,57 @@ Serviços:
 
 ## 📜 Licença
 
-Licença MIT — see [LICENSE](LICENSE)
+**GNU Affero General Public License v3 (AGPLv3)** — [LICENSE](LICENSE)
+
+Copyright (C) 2025-2026 Jonathan Lima
+
+---
+
+## 🔧 Troubleshooting
+
+### "Connection refused"
+- Verifique se o container está rodando: `docker ps`
+- Verifique logs: `docker logs wie-mcp-server`
+
+### "Timeout"
+- Use a URL `/mcp` (Streamable HTTP), não `/sse`
+
+### "Invalid params"
+- Verifique se a URL está correta: deve terminar em `/mcp`
+
+### Acesso Remoto
+
+Para acessar de outro computador, substitua `localhost` pelo IP do host:
+
+```json
+{
+  "mcpServers": {
+    "investigator": {
+      "url": "http://192.168.1.100:8000/mcp"
+    }
+  }
+}
+```
+
+### Variáveis de Ambiente
+
+No `docker-compose.yml`, adicione:
+
+```yaml
+environment:
+  - SEARXNG_HOST=http://searxng:8080
+  - API_KEY=sua-chave-aqui
+```
+
+### Porta Customizada
+
+Para mudar a porta (ex: 8090):
+
+```yaml
+# docker-compose.yml
+ports:
+  - "8090:8000"
+
+# Configuração do cliente
+"url": "http://localhost:8090/mcp"
+```
